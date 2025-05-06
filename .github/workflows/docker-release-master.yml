@@ -62,7 +62,7 @@ jobs:
           push: true
           platforms: linux/amd64 #,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           provenance: false
-          tags: arche-noah/swagger-generator:${{ env.TAG }},arche-noah/swagger-generator:latest
+          tags: ghcr.io/arche-noah/swagger-generator:${{ env.TAG }},ghcr.io/arche-noah/swagger-generator:latest
       - name: Build CLI image and push
         uses: docker/build-push-action@v5
         with:
@@ -70,7 +70,7 @@ jobs:
           push: true
           platforms: linux/amd64 #,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           provenance: false
-          tags: arche-noah/swagger-codegen-cli:${{ env.TAG }},arche-noah/swagger-codegen-cli:latest
+          tags: ghcr.io/arche-noah/swagger-codegen-cli:${{ env.TAG }},ghcr.io/arche-noah/swagger-codegen-cli:latest
       - name: deploy
         if: false # don't run on fork
         run: |
