@@ -66,6 +66,8 @@ jobs:
           platforms: linux/amd64 #,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           provenance: false
           tags: ghcr.io/arche-noah/swagger-generator:unstable
+          labels:
+            - "org.opencontainers.image.source=https://github.com/arche-noah/swagger-codegen"
       - name: Build CLI image and push
         uses: docker/build-push-action@v5
         if: env.SNAP == 'true'
@@ -75,6 +77,8 @@ jobs:
           platforms: linux/amd64 #,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           provenance: false
           tags: ghcr.io/arche-noah/swagger-codegen-cli:unstable
+          labels:
+            - "org.opencontainers.image.source=https://github.com/arche-noah/swagger-codegen"
   build-java8:
 
     runs-on: ubuntu-latest
