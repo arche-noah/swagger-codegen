@@ -26,10 +26,11 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Docker Login
         run: |
-          docker login --username=${{ secrets.DOCKERHUB_SB_USERNAME }} --password=${{ secrets.DOCKERHUB_SB_PASSWORD }}
+          docker login ghcr.io --username=${{ github.actor }} --password=${{ secrets.GITHUB_TOKEN }}
           set -e
       - uses: s4u/maven-settings-action@v2.8.0
         name: setup maven settings.xml
+        if: "false"
         with:
           servers: |
             [{
@@ -52,7 +53,7 @@ jobs:
           if [[ $MY_POM_VERSION =~ ^.*SNAPSHOT$ ]];
           then
             echo "SNAP=true" >> "$GITHUB_ENV"
-            ./mvnw clean deploy -U  --settings $HOME/.m2/settings.xml
+            #./mvnw clean deploy -U  --settings $HOME/.m2/settings.xml
           else
             echo "not deploying release nor building and pushing release docker image: " ${MY_POM_VERSION}
           fi
@@ -62,18 +63,18 @@ jobs:
         with:
           context: ./modules/swagger-generator
           push: true
-          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          platforms: linux/amd64 #,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           provenance: false
-          tags: swaggerapi/swagger-generator:unstable
+          tags: arche-noah/swagger-generator:unstable
       - name: Build CLI image and push
         uses: docker/build-push-action@v5
         if: env.SNAP == 'true'
         with:
           context: ./modules/swagger-codegen-cli
           push: true
-          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+          platforms: linux/amd64 #,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           provenance: false
-          tags: swaggerapi/swagger-codegen-cli:unstable
+          tags: arche-noah/swagger-codegen-cli:unstable
   build-java8:
 
     runs-on: ubuntu-latest

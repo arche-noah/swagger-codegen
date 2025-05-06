@@ -11,9 +11,10 @@
 #
 name: "CodeQL"
 
-on:
-  schedule:
-    - cron: '16 04 * * 2'
+on: {}
+#on:
+#  schedule:
+#    - cron: '16 04 * * 2'
 
 jobs:
   analyze:
