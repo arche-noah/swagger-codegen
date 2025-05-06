@@ -85,6 +85,7 @@ jobs:
   build-java8:
 
     runs-on: ubuntu-latest
+    if: "false" # not in fork
     strategy:
       matrix:
         java: [ 8 ]

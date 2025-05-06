@@ -31,6 +31,7 @@ jobs:
   build-java8:
 
     runs-on: ubuntu-latest
+    if: "false" # not in fork
     strategy:
       matrix:
         java: [ 8 ]
@@ -56,7 +57,7 @@ jobs:
       runs-on: ubuntu-latest
 
       needs: [ build ]
-      if: success()
+      if: "false" # success() # not in fork
 
       steps:
         - name: Trigger LaceWork Scanning using a different method
